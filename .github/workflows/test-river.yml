@@ -4,5 +4,12 @@ jobs:
     check-bats-version:
         runs-on: ubuntu-20.04
         steps:
-            - uses: actions/checkout@v2
-            - run: ls
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Check docker
+              run: docker help && docker --version
+            - name: Clone River and it's submodules
+              run: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
+            - name: Check home dir
+              run: ls .. && ls ../river/
+
