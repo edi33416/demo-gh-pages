@@ -1,0 +1,27 @@
+name: test-river
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-20.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Check docker
+              run: docker --version
+            - name: Check home
+              run: pwd
+            - name: Clone River and it's submodules
+              run: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
+            - name: Use docker to build test image
+              run: make -C ../river/docker build
+            - name: Use docker to run tests
+              run: make -C ../river/docker test
+
