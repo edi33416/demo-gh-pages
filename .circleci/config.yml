@@ -13,6 +13,9 @@ jobs:
                 name: Check home dir
                 command: ls /home/circleci
             - run:
+                name: Check docker
+                command: docker help
+            - run:
                 name: Use docker to build test image
                 command: cd ../river/docker && sudo make build
             
