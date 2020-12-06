@@ -2,14 +2,10 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/demo-gh-pages
-        docker:
-            - image: circleci/buildpack-deps:20.04
-        environment:
-            DEBIAN_FRONTEND: "noninteractive"
+        machine:
+            docker_layer_caching: true
         steps:
             - checkout # check out the code in the project directory
-            - setup_remote_docker:
-                version: 19.03.13
             - run:
                 name: Clone River and it's submodules
                 command: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
