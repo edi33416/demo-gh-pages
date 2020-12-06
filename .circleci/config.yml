@@ -1,8 +1,22 @@
 version: 2.1
 jobs:
     build:
+        working_directory: ~/demo-gh-pages
         docker:
-            - image: ubuntu:20.04
+            - image: circleci/buildpack-deps:20.04
+        environment:
+            DEBIAN_FRONTEND: "noninteractive"
         steps:
             - checkout # check out the code in the project directory
-            - run: echo "hello world" # run the `echo` command
+            - setup_remote_docker:
+                docker_layer_caching: true
+            - run:
+                name: Clone River and it's submodules
+                command: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
+            - run:
+                name: Check home dir
+                command: ls /home/circleci
+            - run:
+                name: Use docker to build test image
+                command: make -C ../river/docker/ build
+            
