@@ -1,8 +1,22 @@
 version: 2.1
 jobs:
     build:
-        docker:
-            - image: ubuntu:20.04
+        working_directory: ~/demo-gh-pages
+        machine: true
         steps:
             - checkout # check out the code in the project directory
-            - run: echo "hello world" # run the `echo` command
+            - run:
+                name: Clone River and it's submodules
+                command: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
+            - run:
+                name: Check home dir
+                command: ls /home/circleci
+            - run:
+                name: Check docker
+                command: docker help
+            - run:
+                name: Use docker to build test image
+                command: make -C ../river/docker build
+            - run:
+                name: Use docker to run tests
+                command: make -C ../river/docker test
