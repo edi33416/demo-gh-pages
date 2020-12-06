@@ -2,9 +2,8 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/demo-gh-pages
-        machine:
-            - setup_remote_docker:
-                version: 19.03.13
+        docker:
+            - image: circleci/buildpack-deps:20.04
         steps:
             - checkout # check out the code in the project directory
             - run:
