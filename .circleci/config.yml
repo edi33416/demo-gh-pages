@@ -2,8 +2,7 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/demo-gh-pages
-        docker:
-            - image: cimg/base:2020.01
+        machine: true
         steps:
             - checkout # check out the code in the project directory
             - run:
