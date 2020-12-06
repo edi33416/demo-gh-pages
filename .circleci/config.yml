@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/demo-gh-pages
         docker:
-            - image: circleci
+            - image: circleci/buildpack-deps
         steps:
             - checkout # check out the code in the project directory
             - setup_remote_docker:
