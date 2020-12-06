@@ -17,5 +17,5 @@ jobs:
                 command: docker help
             - run:
                 name: Use docker to build test image
-                command: cd ../river/docker && sudo make build
+                command: cd ../river/docker && sudo docker build -t river:0.1 --build-arg VERSION=0.1 .
             
