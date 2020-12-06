@@ -16,5 +16,5 @@ jobs:
                 command: ls /home/circleci
             - run:
                 name: Use docker to build test image
-                command: make -C ../river/docker/ build
+                command: sudo make -C ../river/docker/ build
             
