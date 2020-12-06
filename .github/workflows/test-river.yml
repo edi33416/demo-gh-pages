@@ -1,7 +1,7 @@
 name: test-river
 on: [push]
 jobs:
-    check-bats-version:
+    build-and-test:
         runs-on: ubuntu-20.04
         steps:
             - name: Checkout
@@ -12,4 +12,8 @@ jobs:
               run: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
             - name: Check home dir
               run: ls .. && ls ../river/
+            - name: Use docker to build test image
+              run: make -C ../river/docker build
+            - name: Use docker to run tests
+              run: make -C ../river/docker test
 
