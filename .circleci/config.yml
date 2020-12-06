@@ -2,9 +2,12 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/demo-gh-pages
-        machine: true
+        docker:
+            - image: circleci
         steps:
             - checkout # check out the code in the project directory
+            - setup_remote_docker:
+                version: 19.03.13
             - run:
                 name: Clone River and it's submodules
                 command: cd .. && git clone --recursive https://github.com/AGAPIA/river.git
@@ -13,7 +16,7 @@ jobs:
                 command: ls /home/circleci
             - run:
                 name: Check docker
-                command: docker help
+                command: docker help && docker --version
             - run:
                 name: Use docker to build test image
                 command: make -C ../river/docker build
