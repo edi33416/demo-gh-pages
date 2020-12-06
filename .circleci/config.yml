@@ -30,11 +30,15 @@ jobs:
                     sudo make install && \
                     sudo ln -s ${PYTHON_PACKAGES}/capstone/lib/libcapstone.so ${PYTHON_PACKAGES}/capstone/lib/libcapstone.so.4
             - run:
-                name: Run tests
+                name: Build tests
                 command: |
                     cd /home/circleci/river/River3/TestPrograms && \                    
                     gcc -g -O0 -o crackme_xor crackme_xor.c && \
-                    cd ../python && \
+            - run:
+                name: Run tests
+                command: |
+                    python3 --version && \
+                    cd /home/circleci/river/River3/python && \
                     python3 concolic_GenerationalSearch2.py --binaryPath "../TestPrograms/crackme_xor" \
                                                             --architecture x64 \
                                                             --maxLen 1 \
