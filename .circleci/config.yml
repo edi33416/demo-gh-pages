@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/demo-gh-pages
         docker:
-            - image: circleci/buildpack-deps:20.04
+            - image: cimg/base:2020.01
         steps:
             - checkout # check out the code in the project directory
             - run:
